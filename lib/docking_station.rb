@@ -1,8 +1,8 @@
 require_relative 'bike'
 
 class DockingStation
-
   DEFAULT_CAPACITY = 20
+
   attr_accessor :capacity
 
   def initialize capacity=DEFAULT_CAPACITY
@@ -16,30 +16,30 @@ class DockingStation
   end
 
   def release_bike
-    fail 'No bikes available' if empty?
-  #  if there is a bike which is working, pop it and then stop
-    bikes.each do |bike|
-      if bike.working?
-        return bikes.delete(bike) #do something
-      else
-        fail "No working bikes available"
-      end
-    end
-
-    # fail 'No working bikes available' if bikes.last.broken?
-    # bikes.pop
+    bikes.each { |bike| return emit bike if bike.working? }
+    fail "No bikes available" # unless working_bike_available? # could there be an unless thing here
   end
 
   private
-  
+
   attr_reader :bikes
 
   def full?
     bikes.count >= capacity
   end
 
-  def empty?
-    bikes.empty?
+  def emit bike
+    bikes.delete(bike)
   end
+
+  # def empty?
+  #   bikes.empty?
+  # end
+
+
+
+  # def working_bike_available?
+  #   some stuff?
+  # end
 
 end
