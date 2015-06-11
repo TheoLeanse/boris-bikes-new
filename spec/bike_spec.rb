@@ -10,5 +10,11 @@ describe Bike do
     expect(subject).to be_broken
   end
 
+  describe 'report_broken' do
+    it 'should set working to false' do
+      subject.report_broken
+      expect(subject).not_to be_working
+    end
+  end
 
 end
