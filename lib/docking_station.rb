@@ -10,10 +10,6 @@ class DockingStation
     @capacity = capacity
   end
 
-  # def capacity= number
-  #   @capacity = number
-  # end
-
   def dock bike
     fail 'Docking station full' if full?
     bikes << bike
